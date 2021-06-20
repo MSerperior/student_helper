@@ -68,8 +68,8 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="buttons.html">Make Quiz</a>
-                        <a class="collapse-item" href="cards.html">Train</a>
+                        <a class="collapse-item" href="{{ route('quiz.create') }}">Make Quiz</a>
+                        <a class="collapse-item" href="{{ route('quiz.train') }}">Train</a>
                     </div>
                 </div>
             </li>
@@ -303,7 +303,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; Dany Christian 2021</span>
                     </div>
                 </div>
             </footer>

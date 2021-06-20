@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +26,14 @@ Route::get('/profile', function () {
     return view('profile');
 })->name('profile');
 
+Route::get('/make-quiz', function () {
+    return view('quiz.create');
+})->name('quiz.create');
+
+Route::get('/train-quiz', function () {
+    return view('quiz.train');
+})->name('quiz.train');
+
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
