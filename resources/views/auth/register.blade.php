@@ -51,7 +51,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="password" name="repeat-password" class="form-control form-control-user"
+                                        <input type="password" name="password_confirmation" class="form-control form-control-user"
                                             id="exampleRepeatPassword" placeholder="Repeat Password">
                                         @error('repeat-password')
                                             <span class="invalid-feedback" role="alert">
