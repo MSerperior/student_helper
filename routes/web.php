@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\QuizController;
 
 
 /*
@@ -37,3 +37,7 @@ Route::get('/train-quiz', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::group(['prefix' => '/quiz'], function () {
+    Route::get('/train-quiz', [QuizController::class, 'index'])->middleware('auth')->name('quiz.train');
+});
