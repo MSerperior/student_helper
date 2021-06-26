@@ -46,7 +46,7 @@ class QuizController extends Controller
             'ans_C' => ['required', 'string', 'max:255'],
             'ans_D' => ['required', 'string', 'max:255'],
             'ans_E' => ['required', 'string', 'max:255'],
-            'correct_ans' => ['required', 'string', 'max:255'],
+            'correct_ans' => ['required', 'string', 'max:255', 'in:a,b,c,d,e'],
         ]);
 
         $quiz = new Quiz();
@@ -107,5 +107,32 @@ class QuizController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function check(Request $request)
+    {
+        $answers = $request->all();
+        $points = 0;
+        // if(isset($answers["question_1"]))
+        // {
+        //     dd($answers["question_1"]);
+        // }
+
+        $quizzes = Auth::user()->quizzes;
+
+        foreach ($quizzes as $quiz) 
+        {
+            if(isset($answers["question_{$quiz->id}"]))
+            {
+                if($quiz->correct_ans === $answers["question_{$quiz->id}"])
+                {
+                    $points += 1;
+                }
+            }
+        }
+        $score = $points/count($quizzes)*100;
+
+        echo "points : {$points} <br>";
+        echo "score : {$score}";
     }
 }
