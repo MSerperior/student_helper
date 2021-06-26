@@ -18,7 +18,7 @@ use App\Http\Controllers\QuizController;
 
 
 Route::get('/', function () {
-    return view('login');
+    return redirect()->route('home');
 });
 
 
@@ -26,18 +26,15 @@ Route::get('/profile', function () {
     return view('profile');
 })->name('profile');
 
-Route::get('/make-quiz', function () {
-    return view('quiz.create');
-})->name('quiz.create');
-
-Route::get('/train-quiz', function () {
-    return view('quiz.train');
-})->name('quiz.train');
 
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::group(['prefix' => '/quiz'], function () {
+
     Route::get('/train-quiz', [QuizController::class, 'index'])->middleware('auth')->name('quiz.train');
+    Route::get('/make-quiz', [QuizController::class, 'create'])->middleware('auth')->name('quiz.create');
+    Route::post('/store-quiz', [QuizController::class, 'store'])->middleware('auth')->name('quiz.store');
+
 });

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Quiz;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Storage;
 
 class QuizController extends Controller
 {
@@ -28,7 +28,7 @@ class QuizController extends Controller
      */
     public function create()
     {
-        
+        return view('quiz.create');
     }
 
     /**
@@ -39,14 +39,14 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
-        return Validator::make($request, [
+        $validation = $request->validate([
             'question' => ['required', 'string', 'max:255'],
             'ans_A' => ['required', 'string', 'max:255'],
             'ans_B' => ['required', 'string', 'max:255'],
             'ans_C' => ['required', 'string', 'max:255'],
             'ans_D' => ['required', 'string', 'max:255'],
             'ans_E' => ['required', 'string', 'max:255'],
-            'correct_ans' => ['required', 'string', 'max:255', 'in:a,b,c,d,e'],
+            'correct_ans' => ['required', 'string', 'max:255'],
         ]);
 
         $quiz = new Quiz();
@@ -57,6 +57,10 @@ class QuizController extends Controller
         $quiz->ans_D = $request->ans_D;
         $quiz->ans_E = $request->ans_E;
         $quiz->correct_ans = $request->correct_ans;
+        $quiz->user_id = Auth::user()->id;
+        $quiz->save();
+
+        return redirect()->back()->with('success', 'data successfully added');
 
     }
 
